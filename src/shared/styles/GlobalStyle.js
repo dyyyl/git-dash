@@ -15,8 +15,6 @@ const GlobalStyle = createGlobalStyle`
 
   * {
     box-sizing: border-box;
-    /* DISPLAY BORDER */
-    border: 1px solid red;
   }
 
   html {

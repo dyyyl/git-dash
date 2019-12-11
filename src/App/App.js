@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 
 // SHARED IMPORTS
 import Form from 'shared/components/Form';
+import Input from 'shared/components/Input';
+import Label from 'shared/components/Label';
 import GlobalStyle from 'shared/styles/GlobalStyle';
 
 // LOCAL IMPORTS
@@ -29,16 +31,16 @@ const App = () => {
     <Layout>
       <h1>GITHUB DASH</h1>
       <Form onSubmit={handleSubmit}>
-        <label htmlFor="username">
+        <Label htmlFor="username">
           Github Username
           <br />
-          <input
+          <Input
             id="username"
             type="text"
             placeholder="Ada Lovelace"
             onChange={handleChange}
           />
-        </label>
+        </Label>
         <button type="submit">GENERATE</button>
       </Form>
       <GlobalStyle />
