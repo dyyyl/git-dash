@@ -1,62 +1,40 @@
-// NPM IMPORTS
-import axios from 'axios';
+import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloClient } from 'apollo-client';
+import { HttpLink } from 'apollo-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory';
 import React, { useState } from 'react';
 
-// SHARED IMPORTS
-import Button from 'shared/components/Button';
 import Document from 'shared/components/Document';
 import Form from 'shared/components/Form';
-import Input from 'shared/components/Input';
-import Label from 'shared/components/Label';
 import GlobalStyle from 'shared/styles/GlobalStyle';
 
-// LOCAL IMPORTS
 import Layout from './Layout';
 
-// STATEFUL, FUNCTIONAL COMPONENT
 const App = () => {
-  // STATEFUL HOOKS
-  const [username, setUsername] = useState('');
-  const [userData, setUserData] = useState(null);
+  const [isQueriable, setIsQueriable] = useState(false);
+  const [searchName, setSearchName] = useState('');
 
-  // DATA HANDLING FUNCTIONS
-  const handleChange = (event) => setUsername(event.target.value);
+  const httpLink = new HttpLink({
+    uri: 'https://api.github.com/graphql',
+    headers: {
+      authorization: `bearer ${process.env.REACT_APP_TOKEN}`,
+    },
+  });
 
-  const handleSubmit = async (event) => {
-    event.preventDefault(); // PREVENT DEFAULT SCREEN REFRESH ON SUBMIT
+  const client = new ApolloClient({
+    link: httpLink,
+    cache: new InMemoryCache(),
+  });
 
-    // GET ALL DATA FOR USER BY INPUTTED USERNAME
-    try {
-      const user = await axios.get(`https://api.github.com/users/${username}`);
-      console.log(user.data);
-      setUserData(user.data);
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
-
-  // JSX RETURNED BY COMPONENT
   return (
-    <Layout>
-      <h1>GITHUB DASH</h1>
-      <Form onSubmit={handleSubmit}>
-        <Label htmlFor="username">
-          Github Username
-          <br />
-          <Input
-            id="username"
-            type="text"
-            placeholder="Ada Lovelace"
-            onChange={handleChange}
-            required
-          />
-        </Label>
-        <Button type="submit">GENERATE</Button>
-      </Form>
-      {/* IF USER DATA HAS BEEN FETCHED, RENDER DOCUMENT BELOW FORM */}
-      {userData ? <Document userData={userData} /> : null}
-      <GlobalStyle />
-    </Layout>
+    <ApolloProvider client={client}>
+      <Layout>
+        <h1>GITHUB DASH</h1>
+        <Form setIsQueriable={setIsQueriable} setSearchName={setSearchName} />
+        {isQueriable ? <Document searchName={searchName} /> : null}
+        <GlobalStyle />
+      </Layout>
+    </ApolloProvider>
   );
 };
 
