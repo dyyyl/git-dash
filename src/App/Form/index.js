@@ -7,12 +7,12 @@ import Label from 'shared/components/Label';
 
 import FormContainer from './FormContainer';
 
-const Form = ({ setIsQueriable, setSearchName }) => {
+const Form = ({ setIsQueriable, setSearchedName }) => {
   const [username, setUsername] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setSearchName(username);
+    setSearchedName(username);
     setIsQueriable(true);
   };
 
@@ -36,7 +36,7 @@ const Form = ({ setIsQueriable, setSearchName }) => {
 
 Form.propTypes = {
   setIsQueriable: PropTypes.func.isRequired,
-  setSearchName: PropTypes.func.isRequired,
+  setSearchedName: PropTypes.func.isRequired,
 };
 
 export default Form;

@@ -6,13 +6,21 @@ const GET_USER = gql`
       id
       name
       bio
+      isHireable
       avatarUrl
       email
       location
-      repositories(last: 5, orderBy: { field: UPDATED_AT, direction: ASC }) {
+      repositories(first: 10, orderBy: { field: STARGAZERS, direction: DESC }) {
         nodes {
           id
           name
+          languages(first: 10) {
+            nodes {
+              id
+              name
+              color
+            }
+          }
         }
       }
     }

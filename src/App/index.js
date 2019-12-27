@@ -4,15 +4,15 @@ import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import React, { useState } from 'react';
 
-import Document from 'shared/components/Document';
-import Form from 'shared/components/Form';
 import GlobalStyle from 'shared/styles/GlobalStyle';
 
-import Layout from './Layout';
+import AppContainer from './AppContainer';
+import Document from './Document';
+import Form from './Form';
 
 const App = () => {
   const [isQueriable, setIsQueriable] = useState(false);
-  const [searchName, setSearchName] = useState('');
+  const [searchedName, setSearchedName] = useState('');
 
   const httpLink = new HttpLink({
     uri: 'https://api.github.com/graphql',
@@ -28,12 +28,15 @@ const App = () => {
 
   return (
     <ApolloProvider client={client}>
-      <Layout>
+      <AppContainer>
         <h1>GITHUB DASH</h1>
-        <Form setIsQueriable={setIsQueriable} setSearchName={setSearchName} />
-        {isQueriable ? <Document searchName={searchName} /> : null}
+        <Form
+          setIsQueriable={setIsQueriable}
+          setSearchedName={setSearchedName}
+        />
+        {isQueriable && <Document searchedName={searchedName} />}
         <GlobalStyle />
-      </Layout>
+      </AppContainer>
     </ApolloProvider>
   );
 };

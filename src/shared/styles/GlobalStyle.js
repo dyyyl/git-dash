@@ -22,8 +22,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: Arial, Helvetica, sans-serif;
-    min-height: 100vh;
+    font-family: Inter, Arial, Helvetica, sans-serif;
     background-color: var(--light-grey);
     margin: 0;
     color: var(--dark-grey);
@@ -32,32 +31,25 @@ const GlobalStyle = createGlobalStyle`
   h1, h2, h3, p {
     margin: 0;
     letter-spacing: 1px;
-    font-weight: normal;
-  }
-
-  h1, h2, h3 {
-    font-family: Inter, Arial, Helvetica, sans-serif;
+    font-weight: 300;
   }
 
   h1 {
-    font-weight: 700;
     font-size: var(--extra-large);
     letter-spacing: 4px;
   }
 
   h2 {
-    font-weight: 700;
     font-size: var(--large);
   }
 
   h3 {
-    font-weight: 600;
     font-size: var(--large);
   }
 
   p {
-    font-weight: 500;
     font-size: var(--regular);
+    font-weight: 400;
   }
 
   button {
