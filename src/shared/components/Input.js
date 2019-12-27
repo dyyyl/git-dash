@@ -8,6 +8,7 @@ const Input = styled.input`
   border: 0;
   border-bottom: 1px solid var(--dark-grey);
   background-color: var(--light-grey);
+  box-shadow: none;
 
   &:focus {
     outline: none;
