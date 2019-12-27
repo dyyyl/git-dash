@@ -1,62 +1,48 @@
-// NPM IMPORTS
-import axios from 'axios';
-import React, { useState } from 'react';
+import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloClient } from 'apollo-client';
+import { HttpLink } from 'apollo-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-// SHARED IMPORTS
-import Button from 'shared/components/Button';
-import Document from 'shared/components/Document';
-import Form from 'shared/components/Form';
-import Input from 'shared/components/Input';
-import Label from 'shared/components/Label';
 import GlobalStyle from 'shared/styles/GlobalStyle';
 
-// LOCAL IMPORTS
-import Layout from './Layout';
+import AppContainer from './AppContainer';
+import Document from './Document';
+import Form from './Form';
 
-// STATEFUL, FUNCTIONAL COMPONENT
 const App = () => {
-  // STATEFUL HOOKS
-  const [username, setUsername] = useState('');
-  const [userData, setUserData] = useState(null);
+  const httpLink = new HttpLink({
+    uri: 'https://api.github.com/graphql',
+    headers: {
+      authorization: `bearer ${process.env.REACT_APP_TOKEN}`,
+    },
+  });
 
-  // DATA HANDLING FUNCTIONS
-  const handleChange = (event) => setUsername(event.target.value);
+  const client = new ApolloClient({
+    link: httpLink,
+    cache: new InMemoryCache(),
+  });
 
-  const handleSubmit = async (event) => {
-    event.preventDefault(); // PREVENT DEFAULT SCREEN REFRESH ON SUBMIT
-
-    // GET ALL DATA FOR USER BY INPUTTED USERNAME
-    try {
-      const user = await axios.get(`https://api.github.com/users/${username}`);
-      console.log(user.data);
-      setUserData(user.data);
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
-
-  // JSX RETURNED BY COMPONENT
   return (
-    <Layout>
-      <h1>GITHUB DASH</h1>
-      <Form onSubmit={handleSubmit}>
-        <Label htmlFor="username">
-          Github Username
-          <br />
-          <Input
-            id="username"
-            type="text"
-            placeholder="Ada Lovelace"
-            onChange={handleChange}
-            required
-          />
-        </Label>
-        <Button type="submit">GENERATE</Button>
-      </Form>
-      {/* IF USER DATA HAS BEEN FETCHED, RENDER DOCUMENT BELOW FORM */}
-      {userData ? <Document userData={userData} /> : null}
-      <GlobalStyle />
-    </Layout>
+    <ApolloProvider client={client}>
+      <AppContainer>
+        <h1>GITHUB DASH</h1>
+        <BrowserRouter>
+          <Form />
+          <Switch>
+            <Route
+              exact
+              path="/:id"
+              render={(props) => (
+                <Document match={props.match} /> // eslint-disable-line
+              )}
+            />
+          </Switch>
+        </BrowserRouter>
+        <GlobalStyle />
+      </AppContainer>
+    </ApolloProvider>
   );
 };
 
