@@ -18,7 +18,7 @@ const Form = () => {
     event.preventDefault();
 
     if (!validateForm(username)) {
-      alert('Please enter a valid username');
+      alert('Please enter a valid username'); // eslint-disable-line
       return;
     }
 
