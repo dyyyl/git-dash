@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import Avatar from 'shared/components/Avatar';
+import Link from 'shared/components/Link';
 
 import ProfileContainer from './ProfileContainer';
 import ProfileInfo from './ProfileInfo';
@@ -13,7 +14,7 @@ const Profile = ({ avatarUrl, bio, email, location, name }) => (
     <ProfileInfo>
       <h2>{name}</h2>
       <p>{location}</p>
-      {email && <a href={`mailto:${email}`}>{email}</a>}
+      {email && <Link href={`mailto:${email}`}>{email}</Link>}
       <p>{bio}</p>
     </ProfileInfo>
   </ProfileContainer>
