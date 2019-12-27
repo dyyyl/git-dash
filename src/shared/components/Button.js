@@ -13,6 +13,13 @@ const Button = styled.button`
     background-color: var(--dark-grey);
     color: var(--light-grey);
   }
+
+  &:disabled {
+    &:hover {
+      color: #bdbdbd;
+      background-color: var(--light-grey);
+    }
+  }
 `;
 
 export default Button;
