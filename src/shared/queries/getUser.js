@@ -7,10 +7,19 @@ const GET_USER = gql`
       name
       bio
       isHireable
+      createdAt
       avatarUrl
+      followers(first: 100) {
+        nodes {
+          id
+        }
+      }
       email
       location
-      repositories(first: 10, orderBy: { field: STARGAZERS, direction: DESC }) {
+      repositories(
+        first: 100
+        orderBy: { field: STARGAZERS, direction: DESC }
+      ) {
         nodes {
           id
           name

@@ -46,6 +46,7 @@ const Languages = ({ languages }) => {
       <h3>Languages</h3>
       <LanguageContainer>
         {userLanguages
+          .filter((language) => language.percentage >= 5)
           .sort((a, b) => b.percentage - a.percentage)
           .map((language) => (
             <Progress

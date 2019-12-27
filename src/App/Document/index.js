@@ -4,6 +4,7 @@ import { useQuery } from '@apollo/react-hooks';
 
 import GET_USER from 'shared/queries/getUser';
 
+import Frontmatter from './Frontmatter';
 import Languages from './Languages';
 import Profile from './Profile';
 
@@ -15,8 +16,16 @@ const Document = ({ searchedName }) => {
   if (loading) return 'Loading...';
   if (error) return `Error! ${error.message}`;
 
-  // eslint-disable-next-line
-  const { avatarUrl, bio, email, location, name, repositories } = data.user;
+  const {
+    avatarUrl,
+    bio,
+    createdAt,
+    email,
+    followers,
+    location,
+    name,
+    repositories,
+  } = data.user;
 
   const languages = repositories.nodes.reduce(
     (acc, cur) => acc.concat(cur.languages.nodes),
@@ -31,6 +40,13 @@ const Document = ({ searchedName }) => {
         email={email}
         location={location}
         name={name}
+      />
+      <Frontmatter
+        createdAt={createdAt}
+        followers={followers.nodes.length}
+        location={location}
+        name={name}
+        repositories={repositories.nodes.length}
       />
       <Languages languages={languages} />
     </>
