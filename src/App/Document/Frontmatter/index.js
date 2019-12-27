@@ -23,7 +23,7 @@ const Frontmatter = ({
 };
 
 Frontmatter.propTypes = {
-  createdAt: PropTypes.number.isRequired,
+  createdAt: PropTypes.string.isRequired,
   followers: PropTypes.number,
   location: PropTypes.string,
   name: PropTypes.string,

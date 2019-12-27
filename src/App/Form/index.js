@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 
 import Button from 'shared/components/Button';
 import Input from 'shared/components/Input';
@@ -7,13 +7,14 @@ import Label from 'shared/components/Label';
 
 import FormContainer from './FormContainer';
 
-const Form = ({ setIsQueriable, setSearchedName }) => {
+const Form = () => {
+  const [redirect, setRedirect] = useState(false);
   const [username, setUsername] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setSearchedName(username);
-    setIsQueriable(true);
+
+    setRedirect(true);
   };
 
   return (
@@ -30,13 +31,9 @@ const Form = ({ setIsQueriable, setSearchedName }) => {
         />
       </Label>
       <Button type="submit">GENERATE</Button>
+      {redirect && <Redirect to={`/${username}`} />}
     </FormContainer>
   );
-};
-
-Form.propTypes = {
-  setIsQueriable: PropTypes.func.isRequired,
-  setSearchedName: PropTypes.func.isRequired,
 };
 
 export default Form;

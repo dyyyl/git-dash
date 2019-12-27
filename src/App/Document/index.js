@@ -8,9 +8,11 @@ import Frontmatter from './Frontmatter';
 import Languages from './Languages';
 import Profile from './Profile';
 
-const Document = ({ searchedName }) => {
+const Document = ({ match }) => {
+  const { id } = match.params;
+
   const { loading, error, data } = useQuery(GET_USER, {
-    variables: { login: searchedName },
+    variables: { login: id },
   });
 
   if (loading) return 'Loading...';
@@ -54,7 +56,7 @@ const Document = ({ searchedName }) => {
 };
 
 Document.propTypes = {
-  searchedName: PropTypes.string.isRequired,
+  match: PropTypes.object.isRequired,
 };
 
 export default Document;
