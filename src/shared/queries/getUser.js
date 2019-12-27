@@ -6,7 +6,6 @@ const GET_USER = gql`
       id
       name
       bio
-      isHireable
       createdAt
       avatarUrl
       followers(first: 100) {
@@ -23,11 +22,24 @@ const GET_USER = gql`
         nodes {
           id
           name
+          createdAt
+          description
+          url
           languages(first: 10) {
             nodes {
               id
               name
               color
+            }
+          }
+          stargazers(first: 100) {
+            nodes {
+              id
+            }
+          }
+          forks(first: 100) {
+            nodes {
+              id
             }
           }
         }

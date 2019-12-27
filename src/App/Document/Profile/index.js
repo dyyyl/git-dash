@@ -4,6 +4,9 @@ import React from 'react';
 import Avatar from 'shared/components/Avatar';
 import Link from 'shared/components/Link';
 
+import Bio from './Bio';
+import Location from './Location';
+import Name from './Name';
 import ProfileContainer from './ProfileContainer';
 import ProfileInfo from './ProfileInfo';
 
@@ -12,14 +15,14 @@ const Profile = ({ avatarUrl, bio, email, location, name }) => (
   <ProfileContainer>
     <Avatar src={avatarUrl} alt={`${name}`} />
     <ProfileInfo>
-      <h2>{name}</h2>
-      <p style={{ paddingLeft: '1rem' }}>{location}</p>
+      <Name>{name}</Name>
+      <Location>{location}</Location>
       {email && (
         <Link href={`mailto:${email}`} style={{ paddingLeft: '1rem' }}>
           {email}
         </Link>
       )}
-      <p style={{ paddingLeft: '0.2rem' }}>{bio}</p>
+      <Bio>{bio}</Bio>
     </ProfileInfo>
   </ProfileContainer>
 );

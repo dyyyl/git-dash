@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import Container from 'shared/components/Container';
 import Progress from 'shared/components/Progress';
 
 import LanguageContainer from './LanguageContainer';
@@ -42,7 +43,7 @@ const Languages = ({ languages }) => {
   );
 
   return (
-    <div style={{ minWidth: '50vw', marginTop: '5vh' }}>
+    <Container>
       <h3>Languages</h3>
       <LanguageContainer>
         {userLanguages
@@ -57,7 +58,7 @@ const Languages = ({ languages }) => {
             />
           ))}
       </LanguageContainer>
-    </div>
+    </Container>
   );
 };
 

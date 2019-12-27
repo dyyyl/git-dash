@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import FrontmatterContainer from './FrontmatterContainer';
+
 const Frontmatter = ({
   createdAt,
   followers,
@@ -11,14 +13,15 @@ const Frontmatter = ({
   const date = new Date(createdAt).toLocaleDateString();
 
   return (
-    <div style={{ margin: '4rem 10vw 0 10vw' }}>
+    <FrontmatterContainer>
       <p style={{ fontSize: '1.45rem' }}>
-        On Github since {date}, {name} is a developer based in {location} with{' '}
+        On Github since {date}, {name} is a developer{' '}
+        {location && `living in ${location}`} with{' '}
         {repositories >= 100 ? 'over a hundred' : repositories} public
         repositories and {followers >= 100 ? 'over a hundred' : followers}{' '}
         followers.
       </p>
-    </div>
+    </FrontmatterContainer>
   );
 };
 

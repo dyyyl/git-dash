@@ -2,10 +2,12 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 
+import Container from 'shared/components/Container';
 import GET_USER from 'shared/queries/getUser';
 
 import Frontmatter from './Frontmatter';
 import Languages from './Languages';
+import Popular from './Popular';
 import Profile from './Profile';
 
 const Document = ({ match }) => {
@@ -50,7 +52,10 @@ const Document = ({ match }) => {
         name={name}
         repositories={repositories.nodes.length}
       />
-      <Languages languages={languages} />
+      <Container>
+        <Languages languages={languages} />
+        <Popular repositories={repositories} />
+      </Container>
     </>
   );
 };
