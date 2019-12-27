@@ -8,11 +8,14 @@ import Label from 'shared/components/Label';
 import FormContainer from './FormContainer';
 
 const Form = () => {
+  const [loginId, setLoginId] = useState('');
   const [redirect, setRedirect] = useState(false);
   const [username, setUsername] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    setLoginId(username);
 
     setRedirect(true);
   };
@@ -31,7 +34,7 @@ const Form = () => {
         />
       </Label>
       <Button type="submit">GENERATE</Button>
-      {redirect && <Redirect to={`/${username}`} />}
+      {redirect && <Redirect to={`/${loginId}`} />}
     </FormContainer>
   );
 };
