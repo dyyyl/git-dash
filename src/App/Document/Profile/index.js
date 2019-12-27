@@ -13,9 +13,13 @@ const Profile = ({ avatarUrl, bio, email, location, name }) => (
     <Avatar src={avatarUrl} alt={`${name}`} />
     <ProfileInfo>
       <h2>{name}</h2>
-      <p>{location}</p>
-      {email && <Link href={`mailto:${email}`}>{email}</Link>}
-      <p>{bio}</p>
+      <p style={{ paddingLeft: '1rem' }}>{location}</p>
+      {email && (
+        <Link href={`mailto:${email}`} style={{ paddingLeft: '1rem' }}>
+          {email}
+        </Link>
+      )}
+      <p style={{ paddingLeft: '0.2rem' }}>{bio}</p>
     </ProfileInfo>
   </ProfileContainer>
 );
