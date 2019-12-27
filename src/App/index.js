@@ -31,13 +31,9 @@ const App = () => {
         <BrowserRouter>
           <Form />
           <Switch>
-            <Route
-              exact
-              path="/:id"
-              render={(props) => (
-                <Document match={props.match} /> // eslint-disable-line
-              )}
-            />
+            <Route exact path="/:id">
+              <Document />
+            </Route>
           </Switch>
         </BrowserRouter>
         <GlobalStyle />

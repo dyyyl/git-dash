@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
+import { useParams } from 'react-router-dom';
 
 import Container from 'shared/components/Container';
 import GET_USER from 'shared/queries/getUser';
@@ -10,8 +10,8 @@ import Languages from './Languages';
 import Popular from './Popular';
 import Profile from './Profile';
 
-const Document = ({ match }) => {
-  const { id } = match.params;
+const Document = () => {
+  const { id } = useParams();
 
   const { loading, error, data } = useQuery(GET_USER, {
     variables: { login: id },
@@ -58,10 +58,6 @@ const Document = ({ match }) => {
       </Container>
     </>
   );
-};
-
-Document.propTypes = {
-  match: PropTypes.object.isRequired,
 };
 
 export default Document;
