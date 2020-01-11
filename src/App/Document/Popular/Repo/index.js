@@ -14,8 +14,8 @@ const Repo = ({ repo }) => {
   const { createdAt, description, url, stargazers, forks } = repo;
 
   const date = new Date(createdAt).toLocaleDateString();
-  const stargazersCount = stargazers.nodes.length;
-  const forksCount = forks.nodes.length;
+  const stargazersCount = stargazers.totalCount;
+  const forksCount = forks.totalCount;
 
   return (
     <RepoContainer>

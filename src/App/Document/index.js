@@ -47,10 +47,10 @@ const Document = () => {
       />
       <Frontmatter
         createdAt={createdAt}
-        followers={followers.nodes.length}
+        followers={followers.totalCount}
         location={location}
         name={name}
-        repositories={repositories.nodes.length}
+        repositories={repositories.totalCount}
       />
       <Container>
         <Languages languages={languages} />

@@ -8,17 +8,13 @@ const GET_USER = gql`
       bio
       createdAt
       avatarUrl
-      followers(first: 100) {
-        nodes {
-          id
-        }
+      followers {
+        totalCount
       }
       email
       location
-      repositories(
-        first: 100
-        orderBy: { field: STARGAZERS, direction: DESC }
-      ) {
+      repositories(first: 3, orderBy: { field: STARGAZERS, direction: DESC }) {
+        totalCount
         nodes {
           id
           name
@@ -31,16 +27,13 @@ const GET_USER = gql`
               name
               color
             }
+            totalCount
           }
-          stargazers(first: 100) {
-            nodes {
-              id
-            }
+          stargazers {
+            totalCount
           }
-          forks(first: 100) {
-            nodes {
-              id
-            }
+          forks {
+            totalCount
           }
         }
       }
